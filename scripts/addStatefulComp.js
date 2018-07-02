@@ -2,9 +2,6 @@
 
 const fs = require('fs');
 
-//get directory that command has been run
-const workingDir = process.cwd();
-
 //set dir for the templates
 const template = __dirname + '/../templates/statefulComp';
 

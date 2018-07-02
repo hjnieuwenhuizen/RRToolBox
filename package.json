@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "bin": {
+    "rrtb-create-app": "./scripts/createApp.js",
     "rrtb-stateless-comp": "./scripts/addStatelessComp.js",
     "rrtb-stateful-comp": "./scripts/addStatefulComp.js"
   }

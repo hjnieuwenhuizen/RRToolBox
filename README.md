@@ -1,6 +1,9 @@
 # RRToolBox
 React Redux CLI for React 16
 
+## Dependencies
+Node version 7.6.0 and higher.
+
 ## Installation
 ```
 npm install rrtoolbox -g

@@ -37,29 +37,36 @@ const copyFile = (name) => {
 }
 
 //rename file function
-const renameFile = async(oldN, newN) => {
-    let from = dir + '/' + oldN;
-    let to = dir + '/' + newN;
-    await fs.rename(from, to, () => {});
+const renameFile = (oldN, newN) => {
+    return new Promise((resolve, reject) => {
+        let from = dir + '/' + oldN;
+        let to = dir + '/' + newN;
+        fs.rename(from, to, () => {
+            resolve();
+        });
+    });
+
 }
 
 //find and replace function
-const findReplace = async(fileName , find, replace) => {
+const findReplace = (fileName , find, replace) => {
+    return new Promise(async(resolve, reject) => {
+        const file = dir + '/' + fileName;
 
-    const file = dir + '/' + fileName;
+        fs.readFile(file, 'utf8', function (err, data) {
+            if (err) {
+                return reject(err);
+            }
+    
+            var result = data.replace(find, replace);
+    
+            fs.writeFile(file, result, 'utf8', function (err) {
+                if (err) return reject(err);
 
-    fs.readFile(file, 'utf8', function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-
-        var result = data.replace(find, replace);
-
-        fs.writeFile(file, result, 'utf8', function (err) {
-            if (err) return console.log(err);
+                resolve();
+            });
         });
     });
-    
 }
 
 //run tasks function
@@ -78,11 +85,11 @@ const run = async() => {
     await renameFile('Container.js', compNameFormatted + 'Container.js');
 
     //edit files with new name
-    findReplace(compNameFormatted + 'Component.js', /ComponentName/g, compNameFormatted + 'Component');
-    findReplace(compNameFormatted + 'Container.js', /ComponentName/g, compNameFormatted + 'Component');
-    findReplace(compNameFormatted + 'Container.js', /ContainerName/g, compNameFormatted + 'Container');
-    findReplace('index.js', /ContainerName/g, compNameFormatted + 'Container');
-    findReplace('styles.js', /ComponentName/g, compNameFormatted + 'Component');
+    await findReplace(compNameFormatted + 'Component.js', /ComponentName/g, compNameFormatted + 'Component');
+    await findReplace(compNameFormatted + 'Container.js', /ComponentName/g, compNameFormatted + 'Component');
+    await findReplace(compNameFormatted + 'Container.js', /ContainerName/g, compNameFormatted + 'Container');
+    await findReplace('index.js', /ContainerName/g, compNameFormatted + 'Container');
+    await findReplace('styles.js', /ComponentName/g, compNameFormatted + 'Component');
 
     //All done
     console.log('\x1b[32m' + '%s\x1b[0m', 'Component successfully created!');

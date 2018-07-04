@@ -12,6 +12,13 @@ npm install rrtoolbox -g
 ## Usage
 Please ensure you are in the directory that you want to make the changes. All component names must be in camelCase.
 
+### Create React+Redux App
+To create a React and Redux app.
+
+```
+rrtb-create-app appName
+```
+
 ### Create Stateless Component
 To create a stateless component that does not connect to Redux store.
 

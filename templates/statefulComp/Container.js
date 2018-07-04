@@ -11,9 +11,7 @@ class ContainerName extends Component {
 	 */
 	render() {
 		return (
-            <ComponentName
-                classes={this.props.classes}
-            />
+            <ComponentName/>
         )
 	}
 }

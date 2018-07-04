@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import injectSheet from 'react-jss';
+import styles from './styles';
 
 /**
  * ComponentName
@@ -16,4 +18,4 @@ class ComponentName extends PureComponent {
 	}
 }
 
-export default ComponentName;
+export default injectSheet(styles)(ComponentName);
